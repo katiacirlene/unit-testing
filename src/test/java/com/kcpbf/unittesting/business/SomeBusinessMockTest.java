@@ -1,23 +1,24 @@
 package com.kcpbf.unittesting.business;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.kcpbf.unittesting.data.SomeDataService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SomeBusinessMockTest {
 
-	private SomeBusinessImpl business = new SomeBusinessImpl();		
-	private SomeDataService dataServiceMock = mock(SomeDataService.class);
+	@InjectMocks
+	private SomeBusinessImpl business;
 	
-	@Before
-	public void before() {
-		business.setSomeDataService(dataServiceMock);
-	}
+	@Mock
+	private SomeDataService dataServiceMock;
 	
 	@Test
 	public void calculateSumUsingDataService_basic() {
