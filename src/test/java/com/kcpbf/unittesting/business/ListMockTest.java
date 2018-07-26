@@ -1,6 +1,7 @@
 package com.kcpbf.unittesting.business;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -39,5 +40,14 @@ public class ListMockTest {
 		// return the default value as we didn't specify the value for "mock.get(1)"
 		assertEquals(null, mock.get(1));
 	}
+	
+	@Test
+	public void returnWithGenericParameters() {
+		
+		when(mock.get(anyInt())).thenReturn("in28Minutes");
+			
+		assertEquals("in28Minutes", mock.get(0));
+		assertEquals("in28Minutes", mock.get(1));
+	}	
 	
 }
