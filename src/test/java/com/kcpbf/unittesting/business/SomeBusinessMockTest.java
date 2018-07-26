@@ -4,48 +4,43 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.kcpbf.unittesting.data.SomeDataService;
 
 public class SomeBusinessMockTest {
 
+	private SomeBusinessImpl business = new SomeBusinessImpl();		
+	private SomeDataService dataServiceMock = mock(SomeDataService.class);
+	
+	@Before
+	public void before() {
+		business.setSomeDataService(dataServiceMock);
+	}
+	
 	@Test
 	public void calculateSumUsingDataService_basic() {
-		SomeBusinessImpl business = new SomeBusinessImpl();		
-		SomeDataService dataServiceMock = mock(SomeDataService.class);
-		business.setSomeDataService(dataServiceMock);
 		
 		when(dataServiceMock.retrieveAllData()).thenReturn(new int[] { 1, 2, 3 });
 		
-		int actualResult = business.calculateSumUsingDataService();
-		int expectedResult = 6;
-		
-		assertEquals(expectedResult, actualResult);		
+		assertEquals(6, business.calculateSumUsingDataService());		
 	}
-	
-	/*
+		
 	@Test
 	public void calculateSumUsingDataService_empty() {
-		SomeBusinessImpl business = new SomeBusinessImpl();
-		business.setSomeDataService(new SomeDataServiceEmptyStub());
 		
-		int actualResult = business.calculateSumUsingDataService();  // new int[] { }
-		int expectedResult = 0;
+		when(dataServiceMock.retrieveAllData()).thenReturn(new int[] { });
 		
-		assertEquals(expectedResult, actualResult);		
+		assertEquals(0, business.calculateSumUsingDataService());		
 	}	
 
 	@Test
 	public void calculateSumUsingDataService_oneValue() {
-		SomeBusinessImpl business = new SomeBusinessImpl();
-		business.setSomeDataService(new SomeDataServiceOneElementStub());
 		
-		int actualResult = business.calculateSumUsingDataService();   // new int[] { 5 }
-		int expectedResult = 5;
+		when(dataServiceMock.retrieveAllData()).thenReturn(new int[] { 5 });
 		
-		assertEquals(expectedResult, actualResult);		
+		assertEquals(5, business.calculateSumUsingDataService());		
 	}
-	*/
 	
 }
