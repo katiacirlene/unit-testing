@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -34,8 +35,8 @@ public class ItemControllerTest {
 				.andExpect(content().json("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}"))
 				.andReturn();
 		
-		// verify "Hello World"
-		//assertEquals("Hello World", result.getResponse().getContentAsString());
+		// under the covers "content().json()" is calling
+		//JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
 	}
 
 }
