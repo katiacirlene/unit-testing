@@ -1,5 +1,8 @@
 package com.kcpbf.unittesting.business;
 
+import java.util.Arrays;
+import java.util.OptionalInt;
+
 import com.kcpbf.unittesting.data.SomeDataService;
 
 public class SomeBusinessImpl {
@@ -11,13 +14,10 @@ public class SomeBusinessImpl {
 	}
 
 	public int calculateSum(int[] data) {
-		int sum = 0;
+		
+		OptionalInt number = Arrays.stream(data).reduce(Integer::sum);
 
-		for (int value : data) {
-			sum += value;
-		}
-
-		return sum;
+		return number.orElse(0);
 	}
 
 	public int calculateSumUsingDataService() {
